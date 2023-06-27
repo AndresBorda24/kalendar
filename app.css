@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap');
+.kalendar {
+    font-size: 14px;
+    font-family: 'Noto Sans', sans-serif;
+}
+.k-grid {
+    gap: 1px;
+    display:grid !important;
+    grid-template-columns: repeat(7, 1fr);
+    border: 1px solid #ebebeb;
+}
+.k-header-day {
+    font-weight: bold;
+    text-align: center;
+}
+.k-day-number {
+    display: block;
+    text-align: center;
+    padding: 2px;
+    font-size: .75rem;
+}
+.k-head-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.k-btn {
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid #212529;
+    border-radius: 3px;
+    background-color: transparent;
+}
+.k-btn-move {
+    background-color: #393939;
+    color: whitesmoke;
+    border-color: #393939 !important;
+    border-radius: 100%;
+    height: 30px;
+    padding: 0px 8px;
+    width: 30px;
+}
+.k-day-container { background-color:#ebebeb !important }
+.k-day { min-height: 90px }
+.k-x-day { background-color: #f9f9f9 !important }
+.k-blank-space {  }
