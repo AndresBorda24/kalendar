@@ -43,16 +43,12 @@ function getHTMLMarkUp() {
       </div>
 
       <div class="k-grid k-grid-7 k-day-container" style="border-top: 0px;">
-        <template x-for="_ in blankSpaces">
-          <div class="k-day k-blank-space"></div>
-        </template>
-        <template x-for="_ in totalSpaces">
+        <template x-for="_ in __days">
           <div class="k-day k-x-day">
-            <span class="k-day-number" x-text="_"></span>
+            <span
+            class="k-day-number"
+            x-text="_.getDate()"></span>
           </div>
-        </template>
-        <template x-for="_ in blankSpacesBtm">
-          <div class="k-day k-blank-space"></div>
         </template>
       </div>
     </div>
@@ -67,13 +63,6 @@ function kalendar() {
     mode: 1, // 1: Mes, 2: Semana
     /** Fecha que se emplea como Referencia para hacer los calculos*/
     ctrl: new Date(),
-    /** Determina el numero de celdas vacias al principio de cada mes. */
-    blankSpaces: 0,
-    /**  Determina el numero de celdas vacias al final de cada mes. */
-    blankSpacesBtm: 0,
-    /**  El numero total de dias que tiene el mes. */
-    totalSpaces: 0,
-
     __days: [],
 
     /** Day names */
@@ -92,16 +81,15 @@ function kalendar() {
      * Organiza la info necesaria teniendo en cuenta el valor de `ctrl`
     */
     setUp() {
-
-
-
-      this.blankSpaces = this.ctrl.getDay() % 7;
-      this.totalSpaces = new Date(
-        this.Year, this.Month + 1, 0
+      const date  = this.ctrl.getDay() - 1;
+      const startDate = new Date(this.Year, this.Month, -(date+1));
+      const month = (
+        new Date(this.Year, this.Month + 1, 0)
       ).getDate();
+      let totalDates = date + month;
+          totalDates += 7 - (totalDates % 7);
 
-      const _ = this.blankSpaces + this.totalSpaces;
-      this.blankSpacesBtm = Math.ceil(_ / 7) * 7 - _;
+      this.__days = Array(totalDates).fill(0).map(() =>new Date( startDate.setDate(startDate.getDate() + 1 ) ));
     },
 
     /** Carga mes anterior */
